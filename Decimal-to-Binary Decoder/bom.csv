@@ -1,0 +1,9 @@
+﻿Name,Quantity,Component
+"Uard-uno",1," Arduino Uno R3"
+"Uscreen",1," LCD 16 x 2"
+"Sbut_0, Sbut_1",2," Pushbutton"
+"Rresist_1, Rresist_2",2,"10 kΩ Resistor"
+"Rresist_3, Rresist_4",2,"220 Ω Resistor"
+"Dled-red",1,"Red LED"
+"Dled-green",1,"Green LED"
+"1",1," Breadboard Small"
