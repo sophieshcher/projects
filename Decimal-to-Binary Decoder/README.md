@@ -1,89 +1,75 @@
-Decimal to Binary Trainer
-My small Arduino hardware project — a pocket trainer to practice fast decimal-to-binary conversion (1 byte, from 0 to 255).
+# Decimal to Binary Trainer
 
-The circuit and prototype were designed to be easily built and soldered on physical hardware (perfboard or breadboard).
+Pocket Arduino-based trainer for practicing fast decimal-to-binary conversion (0–255, 1 byte). Designed for perfboard or breadboard assembly.
 
-How It Works
-On boot, the Arduino picks a random number from 0 to 255 (seeded by noise on the unconnected pin A0) and displays it on the screen:
+## How It Works
 
-Plaintext
+1. On boot, the board generates a random number from 0 to 255 (seeded by analog noise on pin `A0`) and displays:
+```text
 Generated: 142
 Pass: 
-Enter the answer bit by bit using two pushbuttons (from MSB to LSB, 8 bits total):
 
-Left button — 0
+```
 
-Right button — 1
 
-As soon as all 8 bits are entered, the system immediately checks the result:
+2. Enter the 8-bit binary value from MSB to LSB using two buttons:
+* Left button: `0`
+* Right button: `1`
 
-Green LED lights up — correct.
 
-Red LED lights up — mistake detected.
+3. After entering all 8 bits, the result is evaluated:
+* Green LED: Correct
+* Red LED: Incorrect
 
-To start a new round and generate the next number, simply press the on-board Reset button.
 
-Bill of Materials (BOM)
-Arduino Uno (or Nano / any ATmega328P-compatible board)
+4. Press the on-board **Reset** button to start a new round.
 
-16x2 LCD Display (HD44780-compatible)
+## Components
 
-2 tactile pushbuttons
+* Arduino Uno, Nano, or any ATmega328P compatible board
+* HD44780 16x2 LCD
+* 2x Tactile buttons
+* 2x LEDs (Red, Green)
+* 2x 10k Ohm resistors (pull-down)
+* 2x 220 Ohm resistors (current limiting)
+* Breadboard or perfboard and jumper wires
 
-2 LEDs (Green and Red)
+## Wiring
 
-Resistors:
+Detailed schematic: `decimal-to-binary.pdf`
 
-2× 10 kΩ (pull-down resistors for buttons)
+* **16x2 LCD:**
+* RS -> Pin 7
+* E -> Pin 8
+* D4 -> Pin 9
+* D5 -> Pin 10
+* D6 -> Pin 11
+* D7 -> Pin 12
+* VSS, RW, K -> GND
+* VDD, A -> 5V
+* V0 -> GND (or 10k potentiometer for contrast)
 
-2× 220 Ω (current-limiting resistors for LEDs)
 
-Breadboard or perfboard, jumper wires, and a soldering iron.
+* **Buttons (Pull-Down):**
+* One leg to 5V, other leg to digital pin and 10k resistor to GND.
+* Button 0 -> Pin 2
+* Button 1 -> Pin 3
 
-Pinout & Wiring
-The complete wiring schematic can be found in decimal-to-binary.pdf. A quick pinout reference:
 
-16x2 LCD Display
-RS → Pin 7
+* **LEDs:**
+* Red LED -> 220 Ohm resistor -> Pin 5 (cathode to GND)
+* Green LED -> 220 Ohm resistor -> Pin 6 (cathode to GND)
 
-E → Pin 8
 
-D4 → Pin 9
 
-D5 → Pin 10
+## Flashing
 
-D6 → Pin 11
+1. Open `decimal_to_binary1.ino` in Arduino IDE.
+2. Ensure the built-in `` library is available.
+3. Select board and port, then click **Upload**.
 
-D7 → Pin 12
+## Files
 
-VSS, RW, K (LED-) → GND
-
-VDD, A (LED+) → +5V
-
-V0 (contrast) → to GND (or via a 10 kΩ potentiometer/trimmer if you need to fine-tune the display contrast).
-
-Pushbuttons (Pull-Down Configuration)
-One terminal of each button connects to +5V, while the other connects to the designated Arduino pin and through a 10 kΩ resistor to GND:
-
-Button 0 → Pin 2
-
-Button 1 → Pin 3
-
-LEDs
-Red LED → 220 Ω resistor → Pin 5 (cathode to GND)
-
-Green LED → 220 Ω resistor → Pin 6 (cathode to GND)
-
-How to Flash
-Open decimal_to_binary1.ino in the Arduino IDE.
-
-Requires only the built-in `` library (no extra installs needed).
-
-Select your board model, choose the correct COM port, and click Upload.
-
-Repository Files
-decimal_to_binary1.ino — Arduino firmware sketch.
-
-decimal-to-binary.pdf — wiring diagram / schematic.
-
-bom.csv — bill of materials.
+* `decimal_to_binary1.ino` — Source code
+* `decimal-to-binary.pdf` — Schematic
+* `bom.csv` — Bill of materials
