@@ -1,76 +1,89 @@
-# Decimal to Binary Trainer 
+Decimal to Binary Trainer
+My small Arduino hardware project — a pocket trainer to practice fast decimal-to-binary conversion (1 byte, from 0 to 255).
 
-Мій невеличкий апаратний проєкт на Arduino — кишеньковий тренажер, щоб набивати руку у швидкому переводі десяткових чисел у двійкові (байт, від 0 до 255).
+The circuit and prototype were designed to be easily built and soldered on physical hardware (perfboard or breadboard).
 
-Робила схему та прототип так, щоб його можна було без проблем зібрати й спаяти в залізі (на макетці чи бредборді).
+How It Works
+On boot, the Arduino picks a random number from 0 to 255 (seeded by noise on the unconnected pin A0) and displays it on the screen:
 
----
+Plaintext
+Generated: 142
+Pass: 
+Enter the answer bit by bit using two pushbuttons (from MSB to LSB, 8 bits total):
 
-## Як це працює
+Left button — 0
 
-1. При старті ардуїнка бере випадкове число від 0 до 255 (рандом ініціалізується з шуму на вільному піні `A0`) і виводить його на екран:
-   ```text
-   Generated: 142
-   Pass: 
-   ```
-2. Двома кнопками вводимо відповідь побітово (від старшого біта до молодшого, всього 8 символів):
-   * Ліва кнопка — `0`
-   * Права кнопка — `1`
-3. Щойно введено всі 8 бітів — система одразу звіряє результат:
-   * Загоряється **зелений діод** — усе правильно.
-   * Загоряється **червоний діод** — десь помилка.
-4. Щоб почати новий раунд і згенерувати наступне число, просто тиснемо кнопку **Reset** на платі.
+Right button — 1
 
----
+As soon as all 8 bits are entered, the system immediately checks the result:
 
-## Що знадобиться для збірки
+Green LED lights up — correct.
 
-* **Arduino Uno** (або Nano / будь-який сумісний клон на ATmega328P)
-* **LCD-екран 16x2** (на HD44780)
-* **2 тактові кнопки**
-* **2 світлодіоди** (зелений і червоний)
-* **Резистори:**
-  * 2 шт. по **10 кОм** (стягувальні для кнопок)
-  * 2 шт. по **220 Ом** (струмообмежувальні для світлодіодів)
-* бредборд / монтажна платка, монтажні дроти та паяльник.
+Red LED lights up — mistake detected.
 
----
+To start a new round and generate the next number, simply press the on-board Reset button.
 
-## Розпіновка (куди що паяти)
+Bill of Materials (BOM)
+Arduino Uno (or Nano / any ATmega328P-compatible board)
 
-Детальна схема є у файлі `decimal-to-binary.pdf`, а якщо коротко по пінах:
+16x2 LCD Display (HD44780-compatible)
 
-### Дисплей LCD 16x2
-* `RS` → **Pin 7**
-* `E` → **Pin 8**
-* `D4` → **Pin 9**
-* `D5` → **Pin 10**
-* `D6` → **Pin 11**
-* `D7` → **Pin 12**
-* `VSS`, `RW`, `K (LED-)` → **GND**
-* `VDD`, `A (LED+)` → **+5V**
-* `V0` (контраст) → на **GND** (або через потенціометр/підстроєчник на 10 кОм, якщо треба налаштувати чіткість під свій екран).
+2 tactile pushbuttons
 
-### Кнопки (pull-down схема)
-Кожна кнопка одним контактом іде на **+5V**, а іншим — на пін ардуїно та через резистор **10 кОм** на **GND**:
-* Кнопка `0` → **Pin 2**
-* Кнопка `1` → **Pin 3**
+2 LEDs (Green and Red)
 
-### Світлодіоди
-* Червоний LED → резистор **220 Ом** → **Pin 5** (катод на GND)
-* Зелений LED → резистор **220 Ом** → **Pin 6** (катод на GND)
+Resistors:
 
----
+2× 10 kΩ (pull-down resistors for buttons)
 
-## Як прошити
+2× 220 Ω (current-limiting resistors for LEDs)
 
-1. Відкрити `decimal_to_binary1.ino` в **Arduino IDE**.
-2. Бібліотека потрібна лише стандартна `<LiquidCrystal.h>` (вона вже вбудована).
-3. Вибрати свою плату, COM-порт і натиснути **Upload**.
+Breadboard or perfboard, jumper wires, and a soldering iron.
 
----
+Pinout & Wiring
+The complete wiring schematic can be found in decimal-to-binary.pdf. A quick pinout reference:
 
-## Файли в репозиторії
-* `decimal_to_binary1.ino` — скетч для прошивки.
-* `decimal-to-binary.pdf` — схема з'єднань.
-* `bom.csv` — список деталей.
+16x2 LCD Display
+RS → Pin 7
+
+E → Pin 8
+
+D4 → Pin 9
+
+D5 → Pin 10
+
+D6 → Pin 11
+
+D7 → Pin 12
+
+VSS, RW, K (LED-) → GND
+
+VDD, A (LED+) → +5V
+
+V0 (contrast) → to GND (or via a 10 kΩ potentiometer/trimmer if you need to fine-tune the display contrast).
+
+Pushbuttons (Pull-Down Configuration)
+One terminal of each button connects to +5V, while the other connects to the designated Arduino pin and through a 10 kΩ resistor to GND:
+
+Button 0 → Pin 2
+
+Button 1 → Pin 3
+
+LEDs
+Red LED → 220 Ω resistor → Pin 5 (cathode to GND)
+
+Green LED → 220 Ω resistor → Pin 6 (cathode to GND)
+
+How to Flash
+Open decimal_to_binary1.ino in the Arduino IDE.
+
+Requires only the built-in `` library (no extra installs needed).
+
+Select your board model, choose the correct COM port, and click Upload.
+
+Repository Files
+decimal_to_binary1.ino — Arduino firmware sketch.
+
+decimal-to-binary.pdf — wiring diagram / schematic.
+
+bom.csv — bill of materials.
