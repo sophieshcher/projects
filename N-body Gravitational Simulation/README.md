@@ -73,6 +73,7 @@ Single-step evaluation runtime across particle configurations:
 
 ### 3.1 Cold Collapse Dynamics
 
+![Cold Collapse Animation](plots/nbody_animation.gif)
 Cold collapse simulation of $N = 2000$ particles initialized in a uniform cold distribution ($\vec{v}_0 = 0$) evolving under self-gravity:
 
 * **Physical Evolution**: The distributed particle cloud contracts inward under collective gravity. As particles accelerate toward the mutual potential well, violent relaxation takes place, transforming potential energy into kinetic energy. A stable, high-density virialized core forms at the center, surrounded by an extended, diffuse halo of escaped particles.
@@ -80,6 +81,7 @@ Cold collapse simulation of $N = 2000$ particles initialized in a uniform cold d
 ---
 
 ### 3.2 Algorithmic Scalability Analysis
+![Benchmark Scaling](plots/benchmark_scaling.png)
 
 * **Complexity Verification**: The log-log scaling plot validates theoretical predictions: the direct summation strictly follows the quadratic slope $\propto N^2$, whereas the Barnes-Hut algorithm conforms to the quasi-linear asymptote $\propto N \log N$.
 * **Crossover Regime**: For $N < 800$, the overhead of dynamically constructing and traversing the quadtree exceeds the cost of brute-force pairwise arithmetic. However, for $N \ge 1000$, Barnes-Hut demonstrates superiority, achieving a **$78.8\times$ performance acceleration** at $N = 50\,000$.
@@ -87,7 +89,7 @@ Cold collapse simulation of $N = 2000$ particles initialized in a uniform cold d
 ---
 
 ### 3.3 Symplectic Energy Conservation
-
+![Energy Conservation](plots/energy_conservation.png)
 * **Numerical Stability**: The relative energy drift $\frac{\vert{}E(t) - E_0\vert{}}{\vert{}E_0\vert{}}$ remains bounded within $10^{-3} - 10^{-2}$ throughout 500 integration steps.
 * **Symplectic Structure**: Because the Leapfrog scheme preserves phase-space area, the system exhibits stable bounded oscillations around the true energy surface without artificial damping or catastrophic secular growth.
 * **Approximation Effects**: The Barnes-Hut curve tracks direct summation closely, verifying that multipole grouping at $\theta = 0.5$ does not degrade overall dynamical conservation laws.
@@ -95,14 +97,14 @@ Cold collapse simulation of $N = 2000$ particles initialized in a uniform cold d
 ---
 
 ### 3.4 OpenMP Parallel Scalability & Efficiency
-
+![OpenMP Scaling](plots/openmp_scaling.png)
 * **Speedup Curve ($S_p$)**: Direct summation parallelizes efficiently, reaching a speedup of $2.08\times$ on 2 threads and $2.88\times$ on 4 threads.
 * **Parallel Efficiency ($E_p$)**: Parallel efficiency remains at $104.2\%$ on 2 threads (due to superlinear cache effects where divided particle batches fit entirely into private L1/L2 caches) and settles at $72.0\%$ on 4 threads. The mild drop at 4 threads is governed by Amdahl's Law and memory bus saturation during concurrent lookups.
 
 ---
 
 ### 3.5 Radial Density Profile $\rho(r)$
-
+![Radial Density Profile](plots/radial_density_profile.png)
 * **Density Redistribution**: At step 0, the probability density function is spread broadly across $r \in [0, 1.4]$ corresponding to the initial uniform box/disk.
 * **Core-Halo Separation**: By step 500, a pronounced density peak emerges at $r < 0.3$, quantitatively confirming the birth of a central gravitational cluster. The extended tail ($r > 2.0$) reflects outward ejected particles that gained positive orbital energy via chaotic multi-body slingshot interactions.
 
