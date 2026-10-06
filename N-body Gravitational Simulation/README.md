@@ -1,9 +1,9 @@
-```markdown
+
 # 2D N-Body Gravitational Simulation & Performance Analysis
 
 A high-performance C++ implementation of a two-dimensional gravitational \(N\)-body simulator. This project benchmarks direct summation algorithms (\(O(N^2)\)), multi-threaded shared-memory parallelism with OpenMP, and hierarchical tree approximations via the Barnes-Hut quadtree algorithm (\(O(N \log N)\)) simulating a cold collapse astrophysical scenario.
 
-```
+
 
 ---
 
@@ -186,9 +186,10 @@ plot_radial_density;
 animate_simulation;
 
 ```
+## Simulation Demo
 
-```
-
-Цей варіант повністю готовий для публікації на GitHub або додавання до звіту: кожен розділ аргументований, формули оформлені за стандартом LaTeX, а всі дані відповідають проведеним замірам.
-
-```
+![Cold Collapse Simulation](plots/nbody_animation.gif)
+#### Note on Center of Mass Drift & Symmetry Breaking
+During the simulation run, an observant viewer may notice a slight systemic drift of the cluster's center of mass toward the lower-left quadrant:
+- **Finite Sampling Inhomogeneity**: When generating particles randomly within a uniform bounding box \([-1, 1] \times [-1, 1]\), the discrete sample center of mass \(\vec{R}_{\text{cm}} = \frac{1}{N}\sum \vec{r}_i\) and total linear momentum deviate slightly from theoretical zero. Without subtracting \(\vec{V}_{\text{cm}}\), the ensemble retains a residual net drift velocity.
+- **Asymmetric Force Approximation in Quadtrees**: The Barnes-Hut algorithm groups remote bodies into quadtree nodes using the threshold \(\theta\). Because quadtree decomposition divides spatial domains along rigid Cartesian axes, the multipole approximation inherently violates Newton's Third Law (\(\vec{F}_{ij} \neq -\vec{F}_{ji}\) for cell-particle interactions). This introduces a small non-physical net force causing long-term center-of-mass drift, a well-documented characteristic of classical treecodes.
