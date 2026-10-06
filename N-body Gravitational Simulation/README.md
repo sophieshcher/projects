@@ -1,7 +1,7 @@
 
 # 2D N-Body Gravitational Simulation & Performance Analysis
 
-A high-performance C++ implementation of a two-dimensional gravitational \(N\)-body simulator. This project benchmarks direct summation algorithms (\(O(N^2)\)), multi-threaded shared-memory parallelism with OpenMP, and hierarchical tree approximations via the Barnes-Hut quadtree algorithm (\(O(N \log N)\)) simulating a cold collapse astrophysical scenario.
+A high-performance C++ implementation of a two-dimensional gravitational N-body simulator. This project benchmarks direct summation algorithms O(N^2), multi-threaded shared-memory parallelism with OpenMP, and hierarchical tree approximations via the Barnes-Hut quadtree algorithm O(N \log N) simulating a cold collapse astrophysical scenario.
 
 
 
