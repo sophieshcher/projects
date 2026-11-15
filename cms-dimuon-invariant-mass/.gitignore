@@ -1,0 +1,11 @@
+# Ignore large CERN ROOT data files
+*.root
+data/*.root
+
+# Ignore CMake build artifacts
+build/
+cmake-build-*/
+*.o
+*.obj
+*.exe
+*.out
