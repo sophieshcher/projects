@@ -18,6 +18,16 @@ Central repository containing hardware engineering designs, astrophysical and nu
 
 ## 1. Featured Engineering & Simulation Projects
 
+### 1.0 [CERN CMS Dimuon Invariant Mass Spectrum ($Z \to \mu^+\mu^-$)](./cms-dimuon-invariant-mass)
+High-energy particle physics analysis of real **CERN CMS Open Data** proton–proton collision events in **C++17 (CERN ROOT)**. Reconstructs the 4-momentum invariant mass distribution of opposite-sign dimuon pairs ($\mu^+\mu^-$) and extracts the $Z^0$ boson mass ($M_Z = 91.12 \pm 0.08\text{ GeV}/c^2$) via a relativistic Breit–Wigner plus continuum background fit.
+- **Full Physics & Build Documentation:** [`cms-dimuon-invariant-mass/README.md`](./cms-dimuon-invariant-mass/README.md)
+- **CERN ROOT C++17 Source Code:** [`cms-dimuon-invariant-mass/src/analyze_dimuon.cpp`](./cms-dimuon-invariant-mass/src/analyze_dimuon.cpp)
+- **CMake Build Configuration:** [`cms-dimuon-invariant-mass/CMakeLists.txt`](./cms-dimuon-invariant-mass/CMakeLists.txt)
+- **CERN Open Data `.root` Guide:** [`cms-dimuon-invariant-mass/data/README.md`](./cms-dimuon-invariant-mass/data/README.md)
+- **Reconstructed $Z^0$ Peak & Breit–Wigner Fit Plot:** [`cms-dimuon-invariant-mass/results/z_boson_fit.png`](./cms-dimuon-invariant-mass/results/z_boson_fit.png)
+
+---
+
 ### 1.1 [2D N-Body Gravitational Simulation](./N-body%20Gravitational%20Simulation)
 High-performance C++ simulation of gravitational cold collapse comparing direct $O(N^2)$ summation, multi-threaded **OpenMP** parallelism, and the **Barnes-Hut Quadtree** $O(N \log N)$ algorithm using symplectic Leapfrog integration.
 - **Documentation & Benchmarks:** [`N-body Gravitational Simulation/README.md`](./N-body%20Gravitational%20Simulation/README.md)
